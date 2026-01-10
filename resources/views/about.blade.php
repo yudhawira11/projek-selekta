@@ -1,126 +1,356 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tentang — Soil Sense</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="{{ asset('images/LOGO 2.png') }}">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        :root{--green:#264615;--light:#d9d9d9;--muted:#797979}
-        body{font-family:'Inter', 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0;color:var(--green);-webkit-font-smoothing:antialiased}
-        .header{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;position:relative}
-        .brand{font-weight:700;color:var(--green);font-size:18px;letter-spacing:0.2px;position:absolute;left:50%;transform:translateX(-50%)}
-        .container{max-width:1180px;margin:34px auto;padding:0 28px}
-        h1.title{font-size:48px;margin:8px 0 28px;font-weight:800;line-height:1.05}
-        .grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:36px;align-items:start}
-        .card{background:var(--light);border-radius:30px;padding:40px}
-        .card.large{min-height:420px}
-        .steps{display:flex;align-items:center;justify-content:space-between;padding:18px 10px}
-        .step{display:flex;flex-direction:column;align-items:center;gap:12px}
-        .step .icon{width:84px;height:84px;border-radius:50%;background:#cfcfcf;display:flex;align-items:center;justify-content:center;overflow:hidden}
-        .step .icon img{width:44px;height:44px;opacity:0.75}
-        .benefits ul{margin:12px 0 0;padding-left:20px;color:var(--green);font-size:16px;line-height:1.8}
-        .card.large p{font-size:16px;text-align:justify;text-justify:inter-word}
-        footer{text-align:center;padding:28px 0;color:var(--green);font-size:14px}
-        /* right sidebar menu */
-        .side-menu{position:fixed;right:0;top:0;height:100vh;background:var(--green);width:300px;border-top-left-radius:50px;border-bottom-left-radius:50px;display:flex;flex-direction:column;align-items:center;gap:36px;padding-top:80px;color:#fff}
-        .side-menu{transition:transform .25s ease,opacity .2s ease}
-        .side-menu.collapsed{transform:translateX(110%);opacity:0;pointer-events:none}
-        .side-menu .nav a{display:block;font-weight:700;font-size:32px;color:#fff;padding:18px 0;text-decoration:none;letter-spacing:0.4px}
-        .toggle{display:flex;gap:12px;align-items:center}
-        @media(max-width:900px){
-            .grid{grid-template-columns:1fr}
-            .side-menu{position:static;width:100%;height:auto;border-radius:0;padding:24px}
-            body{padding-bottom:24px}
-            h1.title{font-size:36px}
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tentang — Soil Sense</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="{{ asset('images/LOGO 2.png') }}">
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+  <style>
+    :root {
+      --green: #264615;
+      --light: #d9d9d9;
+      --muted: #797979;
+      --bg: #fff;
+      --text: #264615;
+    }
+
+    html.dark-theme {
+      --bg: #0f1720;
+      --text: #dbe7d0;
+      --light: #1a2633;
+      --green: #8DC63F;
+      --muted: #96a89a;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 28px;
+      position: relative;
+      z-index: 100;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 30px;
+      color: var(--green);
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 48px auto;
+      padding: 0 24px;
+    }
+
+    h1.title {
+      font-size: 40px;
+      margin: 12px 0 24px;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 28px;
+      transition: background 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .card.large {
+      min-height: 360px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .card.large p {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--green);
+      text-align: justify;
+      line-height: 1.9;
+      margin: 0;
+    }
+
+    .steps {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 6px;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step .icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #cfcfcf;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step .icon img {
+      width: 36px;
+      height: 36px;
+      opacity: 0.85;
+    }
+
+    .benefits ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--green);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 0;
+      color: var(--green);
+      font-size: 14px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      height: 100vh;
+      background: var(--green);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      transition: right 0.4s ease;
+      z-index: 200;
+    }
+
+    .sidebar.active { right: 0; }
+
+    .sidebar .nav a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      transition: opacity 0.2s ease;
+    }
+
+    .sidebar .nav a:hover { opacity: 0.85; }
+
+    /* Logo + Hamburger */
+    .menu-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: fixed;
+      right: 28px;
+      top: 16px;
+      z-index: 300;
+    }
+
+    .menu-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; }
+    .menu-btn:hover { opacity: 0.7; }
+
+    /* Inside Sidebar Hamburger */
+    .sidebar .menu-btn { position: absolute; top: 32px; background: transparent; border: none; cursor: pointer; }
+
+    /* How It Works: heading on top; steps flow/wrap and scroll vertically when needed */
+    .card.how {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+      padding: 20px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .card.how h3 { margin: 0; font-size:22px; color:var(--green); }
+
+    .card.how .steps {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: nowrap; /* keep items in one row */
+      width: 100%;
+      box-sizing: border-box;
+      padding: 6px 4px;
+      overflow: visible; /* no scrollbar */
+    }
+
+    .card.how .step { min-width: 0; flex: 1 1 auto; text-align:center; }
+    .card.how .step .icon { width: 64px; height: 64px; }
+    .card.how .step .icon img { width: 36px; height: 36px; }
+    .arrow { font-size: 16px; color: var(--muted); align-self: center; }
+
+    /* Benefits card: heading on top, list below */
+    .card.benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: stretch;
+      padding: 20px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .card.benefits h3 { margin: 0; font-size:22px; color:var(--green); }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      h1.title { font-size: 36px; }
+      .brand { font-size: 15px; margin-left: 12px; }
+      .card.large { min-height: auto; }
+      .menu-group { right: 16px; }
+    }
+  </style>
 </head>
+
 <body>
-    <header class="header">
-        <div class="theme-toggle" style="position:fixed;left:18px;top:18px;z-index:60">
-            <button id="themeToggle" aria-pressed="false" title="Toggle theme" style="display:flex;align-items:center;gap:10px;background:transparent;border:0;padding:6px;">
-                <img src="{{ asset('images/icon-2007-133.svg') }}" alt="theme icon" width="20" height="20" />
-                <span class="switch" aria-hidden="true" style="width:46px;height:26px;background:#ececec;border-radius:999px;display:inline-block;position:relative;box-shadow:inset 0 0 0 2px rgba(0,0,0,0.06);">
-                    <span class="knob" style="position:absolute;left:4px;top:3px;width:20px;height:20px;background:#fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.15);transition:transform .18s ease"></span>
-                </span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="#000" stroke-width="1" fill="#000" opacity="0.9"/></svg>
-            </button>
+  <header class="header">
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" style="position:fixed;left:18px;top:18px;z-index:60">
+      <button id="themeToggle" aria-pressed="false" title="Toggle theme" style="display:flex;align-items:center;gap:10px;background:transparent;border:0;padding:6px;cursor:pointer;">
+        <img src="{{ asset('images/icon-2007-133.svg') }}" alt="theme icon" width="20" height="20" />
+        <span class="switch" aria-hidden="true" style="width:46px;height:26px;background:#ececec;border-radius:999px;display:inline-block;position:relative;box-shadow:inset 0 0 0 2px rgba(0,0,0,0.06);">
+          <span id="knob" class="knob" style="position:absolute;left:4px;top:3px;width:20px;height:20px;background:#fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.15);transition:transform .25s ease"></span>
+        </span>
+        <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="#000" stroke-width="1" fill="#000" opacity="0.9"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="brand">Soil Sense: Fertility and Nutrient Monitoring Dashboard</div>
+
+    <!-- Logo + Hamburger -->
+    <div class="menu-group">
+      @include('components.logo')
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="#264615" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="title">Tentang Soil Sense</h1>
+    <div class="grid">
+      <div class="card large">
+        <p>
+          SoilSense adalah Platform yang dirancang untuk memudahkan pemantauan kualitas tanah. Dengan menampilkan data seperti Nitrogen (N), Phosphorus (P), Potassium (K), serta kelembaban (Moisture) dalam bentuk indikator dan grafik, SoilSense memberikan gambaran yang jelas mengenai kondisi tanah. Platform ini membantu petani, pelajar, dan peneliti dalam mengelola lahan berdasarkan data nyata, bukan sekadar perkiraan.
+        </p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <div class="card how">
+          <h3 style="margin-top:0;color:var(--green);font-size:22px;font-weight:700">Bagaimana Cara Kerjanya</h3>
+            <div class="steps">
+              <div class="step">
+                <div class="icon"><img src="https://www.figma.com/api/mcp/asset/00202df7-6e4b-4db3-b587-f93bf60bd013" alt="sensor"/></div>
+                <div style="font-size:14px;color:var(--green)">Sensor Tanah</div>
+              </div>
+              <div class="arrow">→</div>
+              <div class="step">
+                <div class="icon"><img src="https://www.figma.com/api/mcp/asset/8a15dbf9-82a9-46c0-8025-f1edca113ba7" alt="input"/></div>
+                <div style="font-size:14px;color:var(--green)">Masukkan Data</div>
+              </div>
+              <div class="arrow">→</div>
+              <div class="step">
+                <div class="icon"><img src="https://www.figma.com/api/mcp/asset/79789b27-9441-460a-bd7d-1e9c401c83a9" alt="send"/></div>
+                <div style="font-size:14px;color:var(--green)">Kirim Data</div>
+              </div>
+          </div>
         </div>
-        <div class="brand">Soil Sense: Fertility and Nutrient Monitoring Dashboard</div>
-        <div style="position:fixed;right:18px;top:12px">@include('components.logo')</div>
-    </header>
 
-    <main class="container">
-        <h1 class="title">Tentang Soil Sense</h1>
-        <div class="grid">
-            <div class="card large">
-                <p style="font-weight:600;line-height:1.9;color:var(--green);font-size:18px;">
-                    SoilSense adalah Platform yang dirancang untuk memudahkan pemantauan kualitas tanah. Dengan menampilkan data seperti Nitrogen (N), Phosphorus (P), Potassium (K), serta kelembaban (Moisture) dalam bentuk indikator dan grafik, SoilSense memberikan gambaran yang jelas mengenai kondisi tanah. Platform ini membantu petani, pelajar, dan peneliti dalam mengelola lahan berdasarkan data nyata, bukan sekadar perkiraan.
-                </p>
-            </div>
-
-            <div style="display:flex;flex-direction:column;gap:22px">
-                <div class="card">
-                    <h3 style="margin-top:0;color:var(--green);font-size:22px;font-weight:700">Bagaimana Cara Kerjanya</h3>
-                    <div class="steps">
-                        <div class="step">
-                            <div class="icon"><img src="https://www.figma.com/api/mcp/asset/22dc1c27-fecb-4fb9-aaf8-0896ca71669b" alt="sensor"></div>
-                            <div style="font-size:14px;margin-top:6px;color:var(--green)">Sensor Tanah</div>
-                        </div>
-                        <div style="font-size:24px;color:var(--muted);align-self:center">→</div>
-                        <div class="step">
-                            <div class="icon"><img src="https://www.figma.com/api/mcp/asset/facc149a-3bf6-4c78-be5c-a2ae3c5eb2d3" alt="input"></div>
-                            <div style="font-size:14px;margin-top:6px;color:var(--green)">Masukkan Data</div>
-                        </div>
-                        <div style="font-size:24px;color:var(--muted);align-self:center">→</div>
-                        <div class="step">
-                            <div class="icon"><img src="https://www.figma.com/api/mcp/asset/1aa45e84-23af-4455-b8cb-e01efa4f833a" alt="send"></div>
-                            <div style="font-size:14px;margin-top:6px;color:var(--green)">Kirim Data</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card benefits">
-                    <h3 style="margin-top:0;color:var(--green);font-size:22px;font-weight:700">Manfaat Soil Sense</h3>
-                    <ul>
-                        <li>Memantau kesuburan tanah secara real-time</li>
-                        <li>Membantu menentukan kebutuhan pupuk</li>
-                        <li>Mencegah kekeringan dan kerusakan tanaman</li>
-                        <li>Mendukung pertanian modern (smart farming)</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="card benefits">
+          <h3 style="margin-top:0;color:var(--green);font-size:22px;font-weight:700">Manfaat Soil Sense</h3>
+          <ul>
+            <li>Memantau kesuburan tanah secara real-time</li>
+            <li>Membantu menentukan kebutuhan pupuk</li>
+            <li>Mencegah kekeringan dan kerusakan tanaman</li>
+            <li>Mendukung pertanian modern (smart farming)</li>
+          </ul>
         </div>
-    </main>
+      </div>
+    </div>
+  </main>
 
-    <footer>
-        © 2025 SoilCode Team. All rights reserved.
-    </footer>
+  <footer>© 2025 SoilCode Team. All rights reserved.</footer>
 
-    <aside class="side-menu" id="siteAside">
-        <button id="asideToggle" aria-expanded="true" title="Toggle menu" style="width:44px;height:44px;border:0;background:transparent;color:inherit;display:flex;align-items:center;justify-content:center;margin:0;padding:0;">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16M4 18h16" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </button>
-        @include('components.logo')
-        <nav class="nav">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/soil-sense">Check</a>
-        </nav>
-    </aside>
-    <script>
-        (function(){
-            var btn = document.getElementById('asideToggle');
-            var aside = document.getElementById('siteAside');
-            if(!btn || !aside) return;
-            btn.addEventListener('click', function(e){
-                var collapsed = aside.classList.toggle('collapsed');
-                btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-            });
-        })();
-    </script>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <button class="menu-btn" id="closeSidebar" aria-label="Close menu">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <div style="width:120px;height:120px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+      <img src="{{ asset('images/LOGO 2.png') }}" alt="Soil Sense Logo" style="width:88px;height:88px;object-fit:cover;display:block;">
+    </div>
+
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/soil-sense">Check</a>
+    </nav>
+  </aside>
+
+  <script>
+    // Sidebar toggle
+    const sidebar = document.getElementById('sidebar');
+    const menuBtn = document.getElementById('menuBtn');
+    const closeSidebar = document.getElementById('closeSidebar');
+
+    menuBtn.addEventListener('click', () => sidebar.classList.add('active'));
+    closeSidebar.addEventListener('click', () => sidebar.classList.remove('active'));
+  </script>
 </body>
 </html>
