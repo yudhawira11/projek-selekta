@@ -14,13 +14,27 @@ document.addEventListener('DOMContentLoaded', () => {
 			root.classList.remove('dark-theme');
 			toggle.setAttribute('aria-pressed', 'false');
 		}
-		try { localStorage.setItem('soil-sense-dark', isDark ? '1' : '0'); } catch (e) {}
+		
+		// Update knob position if it exists
+		const knob = document.querySelector('.knob');
+		if (knob) {
+			knob.style.transform = isDark ? 'translateX(20px)' : 'translateX(0)';
+		}
+		
+		// Update icon color if it exists
+		const icon = document.getElementById('themeIcon');
+		if (icon) {
+			icon.style.stroke = isDark ? '#fff' : '#000';
+			icon.style.fill = isDark ? '#fff' : '#000';
+		}
+		
+		try { localStorage.setItem('soil-sense-theme', isDark ? 'dark' : 'light'); } catch (e) {}
 	};
 
 	// initialize from storage or prefers-color-scheme
-	const stored = (function(){ try { return localStorage.getItem('soil-sense-dark'); } catch(e){ return null }})();
-	if (stored === '1') setTheme(true);
-	else if (stored === '0') setTheme(false);
+	const stored = (function(){ try { return localStorage.getItem('soil-sense-theme'); } catch(e){ return null }})();
+	if (stored === 'dark') setTheme(true);
+	else if (stored === 'light') setTheme(false);
 	else setTheme(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
 	toggle.addEventListener('click', () => {

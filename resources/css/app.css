@@ -1,19 +1,27 @@
 /* Styles for Soil Sense page (moved from inline blade) */
 html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
-.page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px;background:#fff}
+
+/* CSS Variables for theme */
+html{--green:#264615;--light:#d9d9d9;--muted:#797979;--bg:#fff;--text:#264615}
+html.dark-theme{--bg:#0f1720;--text:#dbe7d0;--light:#1a2633;--green:#8dc63f;--muted:#96a89a}
+
+.page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px;background:var(--bg);color:var(--text);transition:background 0.4s ease, color 0.4s ease}
 .card{max-width:1100px;width:100%;display:flex;gap:48px;align-items:center}
 .left{flex:1;display:flex;align-items:center;justify-content:center}
-.illustration{width:520px;max-width:100%;border-radius:28px;overflow:hidden;background:linear-gradient(#9dd6ff,#eaf6ff)}
+.illustration{width:520px;max-width:100%;border-radius:28px;overflow:hidden;background:linear-gradient(135deg, #9dd6ff, #eaf6ff)}
 .illustration img{display:block;width:100%;height:auto}
 .right{width:420px;display:flex;flex-direction:column;align-items:center;text-align:center}
-.title{font-weight:800;color:#264615;font-size:48px;margin:0 0 18px}
-.logo-circle{width:96px;height:96px;border-radius:999px;border:6px solid #8dc63f;display:flex;align-items:center;justify-content:center;margin:8px 0}
+.title{font-weight:800;color:var(--green);font-size:48px;margin:0 0 18px}
+.logo-circle{width:96px;height:96px;border-radius:999px;border:6px solid var(--green);display:flex;align-items:center;justify-content:center;margin:8px 0}
 .logo-circle img{width:56px;height:56px}
-.lead{color:#264615;font-weight:600;font-size:18px;line-height:1.45;margin:18px 0 28px}
-.btn{display:inline-block;padding:16px 34px;border-radius:36px;font-weight:700;font-size:18px;text-decoration:none;color:#fff;min-width:260px}
-.btn-green{background:#8dc63f;margin-bottom:18px}
+.lead{color:var(--text);font-weight:600;font-size:18px;line-height:1.45;margin:18px 0 28px}
+.btn{display:inline-block;padding:16px 34px;border-radius:36px;font-weight:700;font-size:18px;text-decoration:none;color:#fff;min-width:260px;border:none;cursor:pointer;transition:opacity 0.3s ease}
+.btn:hover{opacity:0.9}
+.btn-green{background:#8dc63f}
+.btn-green:hover{background:#7ab535}
 .btn-brown{background:#592c0e}
-.footer{margin-top:56px;color:#264615;font-size:13px}
+.btn-brown:hover{background:#4a240b}
+.footer{margin-top:56px;color:var(--text);font-size:13px}
 
 @media (max-width:900px){
   .card{flex-direction:column;padding:0 12px}
@@ -21,19 +29,10 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   .title{font-size:36px}
 }
 
-/* Theme toggle styles and dark-theme overrides */
-.theme-toggle button{background:transparent;border:0;padding:6px;cursor:pointer}
-.theme-toggle .switch{background:#ececec}
-.theme-toggle .knob{transform:translateX(0)}
-.dark-theme .theme-toggle svg{filter:brightness(0.9) invert(1)}
+/* Theme toggle button styles */
+.theme-toggle button{background:transparent;border:0;padding:6px;cursor:pointer;display:flex;align-items:center;gap:10px}
+.theme-toggle .switch{background:#ececec;transition:background 0.3s ease}
+.theme-toggle .knob{background:#fff;transition:transform 0.25s ease}
 .dark-theme .theme-toggle .switch{background:#444}
-.dark-theme .theme-toggle .knob{background:#fff}
-.dark-theme .knob{transform:translateX(20px)}
+.dark-theme .theme-toggle svg{filter:brightness(0.9) invert(1)}
 
-.dark-theme html, .dark-theme body{background:#0f1720;color:#dbe7d0}
-.dark-theme .page{background:#071116}
-.dark-theme .title{color:#d7f0d2}
-.dark-theme .lead{color:#cfe6c6}
-.dark-theme .footer{color:#9fbca0}
-.dark-theme .btn-green{background:#6fa92b}
-.dark-theme .btn-brown{background:#3e210f}
