@@ -32,7 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 
 	// initialize from storage or prefers-color-scheme
-	const stored = (function(){ try { return localStorage.getItem('soil-sense-theme'); } catch(e){ return null }})();
+	const stored = (function(){
+		try {
+			// primary key is 'soil-sense-theme'; fallback to legacy 'ss_theme' for older pages
+			return localStorage.getItem('soil-sense-theme') || localStorage.getItem('ss_theme');
+		} catch(e){ return null }
+	})();
 	if (stored === 'dark') setTheme(true);
 	else if (stored === 'light') setTheme(false);
 	else setTheme(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);

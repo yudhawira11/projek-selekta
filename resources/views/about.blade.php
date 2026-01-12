@@ -49,6 +49,7 @@
       color: var(--green);
       text-align: center;
       position: absolute;
+      top: 18px;
       left: 50%;
       transform: translateX(-50%);
       white-space: nowrap;
@@ -59,7 +60,7 @@
     /* Container */
     .container {
       max-width: 1200px;
-      margin: 48px auto;
+      margin: 50px auto;
       padding: 0 24px;
     }
 
@@ -188,7 +189,7 @@
       gap: 16px;
       position: fixed;
       right: 28px;
-      top: 16px;
+      top: 18px;
       z-index: 300;
     }
 
@@ -339,7 +340,7 @@
     <nav class="nav">
       <a href="/">Home</a>
       <a href="/about">About</a>
-      <a href="/soil-sense">Check</a>
+      <a href="/cek-tanah">Check</a>
     </nav>
   </aside>
 
