@@ -37,7 +37,7 @@
 
           <div style="display:flex;flex-direction:column;gap:10px;">
             <a class="btn btn-green" href="/about">Tentang Soil Sense</a>
-            <a class="btn btn-brown" href="#">Mulai Cek Tanah</a>
+            <a class="btn btn-brown" href="/cek-tanah">Mulai Cek Tanah</a>
           </div>
 
           <div class="footer">© 2025 SoilCode Team. All rights reserved.</div>

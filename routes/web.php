@@ -24,3 +24,7 @@ Route::get('/soil-sense', function () {
 Route::get('/about', function () {
     return view('about');
 });
+
+Route::get('/cek-tanah', function (){
+    return view('cek_tanah');
+});
