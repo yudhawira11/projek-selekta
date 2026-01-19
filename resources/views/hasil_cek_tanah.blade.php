@@ -105,12 +105,39 @@
 
       <aside class="card" style="display:flex;flex-direction:column;gap:16px;align-items:stretch">
         <h3 style="margin:0;font-size:20px;color:var(--green);font-weight:700">Rekomendasi</h3>
-        <ul style="margin:0;padding-left:18px;color:var(--text);line-height:1.8">
-          <li>Tambahkan bahan organik untuk memperbaiki struktur tanah.</li>
-          <li>Periksa pH tanah dan sesuaikan bila perlu.</li>
-          <li>Atur jadwal irigasi sesuai kelembaban.</li>
+
+        <ul id="recommendationsList" style="margin:0;padding-left:0;color:var(--text);line-height:1.6;list-style:none">
+          @if(!empty($recommendations) && count($recommendations))
+            @foreach($recommendations as $rec)
+              <li class="rec-item" style="padding:10px;border-radius:8px;background:rgba(255,255,255,0.03);margin-bottom:8px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+                  <div style="flex:1">
+                    <div style="font-weight:700;color:var(--green);font-size:14px">{{ $rec['title'] ?? 'Rekomendasi' }}</div>
+                    @if(!empty($rec['subtitle']))
+                      <div style="font-size:12px;color:var(--muted);margin-top:4px">{{ $rec['subtitle'] }}</div>
+                    @endif
+                  </div>
+
+                  <div style="display:flex;gap:8px;align-items:center">
+                    <button type="button" class="toggle-rec" data-id="{{ $loop->index }}" aria-expanded="false" style="background:transparent;border:1px solid rgba(0,0,0,0.06);padding:6px 8px;border-radius:8px;cursor:pointer;color:var(--green);font-weight:700">Detail</button>
+                    <button type="button" class="copy-rec" data-copy="{{ htmlspecialchars(($rec['title'] ?? '') . ' - ' . ($rec['detail'] ?? '')) }}" title="Copy" style="background:var(--green);color:#fff;border:0;padding:6px 8px;border-radius:8px;cursor:pointer">Salin</button>
+                  </div>
+                </div>
+
+                <div class="rec-detail" id="rec-detail-{{ $loop->index }}" style="display:none;margin-top:10px;color:var(--muted);font-size:13px">{{ $rec['detail'] ?? '' }}</div>
+
+                @if(!empty($rec['source']))
+                  <div style="margin-top:8px;font-size:12px;color:var(--muted)"><strong style="color:var(--muted)">Sumber:</strong> {{ $rec['source'] }}</div>
+                @endif
+              </li>
+            @endforeach
+          @else
+            <li style="margin-bottom:8px">Tambahkan bahan organik untuk memperbaiki struktur tanah.</li>
+            <li style="margin-bottom:8px">Periksa pH tanah dan sesuaikan bila perlu.</li>
+            <li style="margin-bottom:8px">Atur jadwal irigasi sesuai kelembaban.</li>
+            <div style="margin-top:8px"><strong style="color:var(--muted)">Sumber:</strong> Soil Sense Advisor</div>
+          @endif
         </ul>
-        <div style="margin-top:8px"><strong style="color:var(--muted)">Sumber:</strong> Soil Sense Advisor</div>
       </aside>
     </div>
   </main>
@@ -144,6 +171,38 @@
       closeSidebar.addEventListener('click', () => sidebar.classList.remove('active'));
     }
     // Theme: keep markup compatible with central theme script in resources/js/app.js
+
+    // Recommendations interactivity: toggle details + copy text
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle detail panels
+      document.querySelectorAll('.toggle-rec').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          const panel = document.getElementById('rec-detail-' + id);
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          if (panel) {
+            panel.style.display = expanded ? 'none' : 'block';
+            btn.setAttribute('aria-expanded', (!expanded).toString());
+            btn.textContent = expanded ? 'Detail' : 'Tutup';
+          }
+        });
+      });
+
+      // Copy recommendation text to clipboard
+      document.querySelectorAll('.copy-rec').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const text = btn.getAttribute('data-copy') || btn.getAttribute('data-copy-text') || btn.textContent;
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = 'Disalin';
+            setTimeout(() => btn.textContent = 'Salin', 1200);
+          } catch (e) {
+            console.warn('Clipboard failed, fallback to prompt', e);
+            window.prompt('Salin teks berikut:', text);
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>

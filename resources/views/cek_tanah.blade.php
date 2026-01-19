@@ -35,7 +35,7 @@
     footer{text-align:center;padding:28px 0;color:var(--green);font-size:14px}
     @media (max-width:900px){.grid{grid-template-columns:1fr}.menu-group{right:16px}}
     /* Main layout: stack children vertically and add spacing/padding */
-    main.container { display:flex; flex-direction:column; gap:28px; align-items:stretch; padding:12px 8px; }
+    main.container { display:flex; flex-direction:column; gap:12px; align-items:stretch; padding:12px 8px; }
     /* Disable forced overflow on descendants so elements render naturally */
     main.container * { overflow: visible !important; -webkit-overflow-scrolling: auto !important; }
     /* Add consistent padding to direct children and allow natural height */
@@ -77,7 +77,7 @@
   </header>
 
   <main class="container">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;margin-top:0;flex-wrap:wrap;gap:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0;flex-wrap:wrap;gap:12px">
       <h1 class="title" style="font-size:36px;margin:0;font-weight:800;color:var(--green);flex:1;min-width:200px;max-width:680px">Input Nutrient &amp; Moisture Levels</h1>
       <div style="display:flex;gap:12px;align-items:center">
         <div style="background:#2a89db;color:#fff;border:0;padding:12px 20px;border-radius:50px;font-weight:700;font-size:16px">Minggu 4</div>
