@@ -21,14 +21,11 @@
     .stat .value{font-size:36px;font-weight:800;color:var(--green)}
     .progress{width:100%;height:14px;border-radius:999px;background:#e6e6e6;overflow:hidden}
     .progress > i{display:block;height:100%;background:linear-gradient(90deg,#8DC63F,#2a89db)}
-    .sidebar{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--green);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;border-top-left-radius:50px;border-bottom-left-radius:50px;transition:right .32s cubic-bezier(.2,.9,.2,1);z-index:200;padding-top:48px}
+    .sidebar{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--green);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:60px;border-top-left-radius:50px;border-bottom-left-radius:50px;transition:right .4s ease;z-index:200}
     .sidebar.active{right:0}
-    .sidebar .menu-btn{position:absolute;top:18px;right:18px;background:transparent;border:none;cursor:pointer}
-    .sidebar-logo{width:120px;height:120px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.08)}
-    .sidebar-logo img{width:88px;height:88px;object-fit:cover;display:block}
-    .sidebar .nav{display:flex;flex-direction:column;gap:18px;padding:0;margin:0}
-    .sidebar .nav a{display:block;color:#fff;text-decoration:none;font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;text-align:center;opacity:0.98;transition:transform .14s ease,opacity .14s ease}
-    .sidebar .nav a:hover{opacity:1;transform:translateX(6px)}
+    .sidebar .nav a{display:block;color:#fff;text-decoration:none;font-family:'Poppins',sans-serif;font-size:28px;font-weight:700;text-align:center;transition:opacity .2s ease}
+    .sidebar .nav a:hover{opacity:.85}
+    .sidebar .menu-btn{position:absolute;top:32px;background:transparent;border:none;cursor:pointer}
     .menu-group{display:flex;align-items:center;gap:16px;position:fixed;right:28px;top:18px;z-index:300}
     .menu-btn{background:none;border:0;cursor:pointer}
     footer{text-align:center;padding:28px 0;color:var(--green);font-size:14px}
@@ -126,8 +123,8 @@
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
 
-    <div class="sidebar-logo">
-      <img src="{{ asset('images/LOGO 2.png') }}" alt="Soil Sense Logo">
+    <div style="width:120px;height:120px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+      <img src="{{ asset('images/LOGO 2.png') }}" alt="Soil Sense Logo" style="width:88px;height:88px;object-fit:cover;display:block;">
     </div>
 
     <nav class="nav">
