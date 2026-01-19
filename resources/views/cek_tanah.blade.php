@@ -9,79 +9,6 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 
   <style>
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 4px;
-      border-radius: 999px;
-      background: #e6e6e6;
-      outline: none;
-      cursor: pointer;
-    }
-    
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: #fff;
-      cursor: pointer;
-      border: 3px solid #888;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-    
-    input[type="range"]::-moz-range-thumb {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: #fff;
-      cursor: pointer;
-      border: 3px solid #888;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-
-    @media (max-width: 768px) {
-      input[type="range"] {
-        height: 3px;
-      }
-      
-      input[type="range"]::-webkit-slider-thumb {
-        width: 32px;
-        height: 32px;
-      }
-      
-      input[type="range"]::-moz-range-thumb {
-        width: 32px;
-        height: 32px;
-      }
-
-      div[style*="display:flex;justify-content:space-between"] {
-        flex-direction: column;
-        align-items: flex-start !important;
-      }
-
-      div[style*="background:#d2ebce"] {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      div[style*="background:#fadfca"] {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      div[style*="background:#ded6ee"] {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      div[style*="background:#c8e3f8"] {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
     :root { --green:#264615; --light:#d9d9d9; --muted:#797979; --bg:#fff; --text:#264615; }
     html.dark-theme { --bg:#0f1720; --text:#dbe7d0; --light:#1a2633; --green:#8DC63F; --muted:#96a89a; }
     body{margin:0;font-family:'Inter','Poppins',system-ui,-apple-system,'Segoe UI',Roboto,Arial; background:var(--bg); color:var(--text);-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
@@ -150,13 +77,13 @@
 
         <!-- Nitrogen Card -->
         <div style="background:#d2ebce;border-radius:30px;padding:20px 28px;display:flex;align-items:center;gap:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);min-height:135px">
-          <div style="width:68px;height:68px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,0.6)">
-            <img src="https://www.figma.com/api/mcp/asset/39bbaa13-f5a1-41f2-a326-65deb734bc83" alt="N" style="width:50px;height:50px;object-fit:contain"/>
-          </div>
+            <div style="width:68px;height:68px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:transparent">
+            <img src="{{ asset('images/nitrogen-icon.png') }}" alt="N" style="width:50px;height:50px;object-fit:contain"/>
+            </div>
           <div style="flex:1;display:flex;flex-direction:column;gap:8px">
             <h3 style="margin:0;font-size:28px;font-weight:800;color:var(--green)">Nitrogen (N)</h3>
             <div style="display:flex;gap:12px;align-items:center;width:100%">
-              <input type="range" name="nitrogen" value="65" min="0" max="100" style="flex:1;height:3px;border-radius:999px;background:linear-gradient(90deg,#8DC63F 0%,#8DC63F 65%,#e6e6e6 65%,#e6e6e6 100%)" oninput="updateSlider(this,'nitrogen-val')"/>
+              <input type="range" class="slider nitrogen" name="nitrogen" value="65" min="0" max="100" style="flex:1;" />
             </div>
           </div>
           <span style="font-size:32px;font-weight:800;color:var(--green);min-width:60px;text-align:right;flex-shrink:0" class="nitrogen-val">65%</span>
@@ -164,13 +91,13 @@
 
         <!-- Phosphorus Card -->
         <div style="background:#fadfca;border-radius:30px;padding:20px 28px;display:flex;align-items:center;gap:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);min-height:135px">
-          <div style="width:68px;height:68px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,0.6)">
-            <img src="https://www.figma.com/api/mcp/asset/569070ff-b426-430d-9bc8-0f7c1a7f7e50" alt="P" style="width:50px;height:50px;object-fit:contain"/>
+          <div style="width:68px;height:68px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:transparent">
+            <img src="{{ asset('images/phosporus-icon.png') }}" alt="P" style="width:50px;height:50px;object-fit:contain"/>
           </div>
           <div style="flex:1;display:flex;flex-direction:column;gap:8px">
             <h3 style="margin:0;font-size:28px;font-weight:800;color:var(--green)">Phosphorus (P)</h3>
             <div style="display:flex;gap:12px;align-items:center;width:100%">
-              <input type="range" name="phosphorus" value="40" min="0" max="100" style="flex:1;height:3px;border-radius:999px;background:linear-gradient(90deg,#ff8c42 0%,#ff8c42 40%,#e6e6e6 40%,#e6e6e6 100%)" oninput="updateSlider(this,'phosphorus-val')"/>
+              <input type="range" class="slider phosphorus" name="phosphorus" value="40" min="0" max="100" style="flex:1;" />
             </div>
           </div>
           <span style="font-size:32px;font-weight:800;color:var(--green);min-width:60px;text-align:right;flex-shrink:0" class="phosphorus-val">40%</span>
@@ -178,13 +105,13 @@
 
         <!-- Potassium Card -->
         <div style="background:#ded6ee;border-radius:30px;padding:20px 28px;display:flex;align-items:center;gap:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);min-height:135px">
-          <div style="width:68px;height:68px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,0.6)">
-            <img src="https://www.figma.com/api/mcp/asset/f6ddb53a-734e-41e8-bfc8-88344dce83ba" alt="K" style="width:50px;height:50px;object-fit:contain"/>
+          <div style="width:68px;height:68px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:transparent">
+            <img src="{{ asset('images/potassium-icon.png') }}" alt="K" style="width:50px;height:50px;object-fit:contain"/>
           </div>
           <div style="flex:1;display:flex;flex-direction:column;gap:8px">
             <h3 style="margin:0;font-size:28px;font-weight:800;color:var(--green)">Potassium (K)</h3>
             <div style="display:flex;gap:12px;align-items:center;width:100%">
-              <input type="range" name="potassium" value="20" min="0" max="100" style="flex:1;height:3px;border-radius:999px;background:linear-gradient(90deg,#9966cc 0%,#9966cc 20%,#e6e6e6 20%,#e6e6e6 100%)" oninput="updateSlider(this,'potassium-val')"/>
+              <input type="range" class="slider potassium" name="potassium" value="20" min="0" max="100" style="flex:1;" />
             </div>
           </div>
           <span style="font-size:32px;font-weight:800;color:var(--green);min-width:60px;text-align:right;flex-shrink:0" class="potassium-val">20%</span>
@@ -192,13 +119,13 @@
 
         <!-- Moisture Card -->
         <div style="background:#c8e3f8;border-radius:30px;padding:20px 28px;display:flex;align-items:center;gap:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);min-height:135px">
-          <div style="width:68px;height:68px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,0.6)">
-            <img src="https://www.figma.com/api/mcp/asset/d1a5281f-0e9c-4aa6-9b59-c48b580b5a37" alt="moisture" style="width:50px;height:50px;object-fit:contain"/>
+          <div style="width:68px;height:68px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:transparent">
+            <img src="{{ asset('images/moisture-icon.png') }}" alt="moisture" style="width:50px;height:50px;object-fit:contain"/>
           </div>
           <div style="flex:1;display:flex;flex-direction:column;gap:8px">
             <h3 style="margin:0;font-size:28px;font-weight:800;color:var(--green)">Moisture</h3>
             <div style="display:flex;gap:12px;align-items:center;width:100%">
-              <input type="range" name="moisture" value="55" min="0" max="100" style="flex:1;height:3px;border-radius:999px;background:linear-gradient(90deg,#2a9bd5 0%,#2a9bd5 55%,#e6e6e6 55%,#e6e6e6 100%)" oninput="updateSlider(this,'moisture-val')"/>
+              <input type="range" class="slider moisture" name="moisture" value="55" min="0" max="100" style="flex:1;" />
             </div>
           </div>
           <span style="font-size:32px;font-weight:800;color:var(--green);min-width:60px;text-align:right;flex-shrink:0" class="moisture-val">55%</span>

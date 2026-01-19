@@ -294,17 +294,17 @@
           <h3 style="margin-top:0;color:var(--green);font-size:22px;font-weight:700">Bagaimana Cara Kerjanya</h3>
             <div class="steps">
               <div class="step">
-                <div class="icon"><img src="https://www.figma.com/api/mcp/asset/00202df7-6e4b-4db3-b587-f93bf60bd013" alt="sensor"/></div>
+                <div class="icon"><img src="{{ asset('images/sensor-icon.png') }}" alt="sensor" width="36" height="36" /></div>
                 <div style="font-size:14px;color:var(--green)">Sensor Tanah</div>
               </div>
               <div class="arrow">→</div>
               <div class="step">
-                <div class="icon"><img src="https://www.figma.com/api/mcp/asset/8a15dbf9-82a9-46c0-8025-f1edca113ba7" alt="input"/></div>
+                <div class="icon"><img src="{{ asset('images/input-icon.png') }}" alt="input" width="36" height="36" /></div>
                 <div style="font-size:14px;color:var(--green)">Masukkan Data</div>
               </div>
               <div class="arrow">→</div>
               <div class="step">
-                <div class="icon"><img src="https://www.figma.com/api/mcp/asset/79789b27-9441-460a-bd7d-1e9c401c83a9" alt="send"/></div>
+                <div class="icon"><img src="{{ asset('images/send-icon.png') }}" alt="send" width="36" height="36" /></div>
                 <div style="font-size:14px;color:var(--green)">Kirim Data</div>
               </div>
           </div>
