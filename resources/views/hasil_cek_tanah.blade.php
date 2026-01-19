@@ -21,14 +21,11 @@
     .stat .value{font-size:36px;font-weight:800;color:var(--green)}
     .progress{width:100%;height:14px;border-radius:999px;background:#e6e6e6;overflow:hidden}
     .progress > i{display:block;height:100%;background:linear-gradient(90deg,#8DC63F,#2a89db)}
-    .sidebar{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--green);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;border-top-left-radius:50px;border-bottom-left-radius:50px;transition:right .32s cubic-bezier(.2,.9,.2,1);z-index:200;padding-top:48px}
+    .sidebar{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--green);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:60px;border-top-left-radius:50px;border-bottom-left-radius:50px;transition:right .4s ease;z-index:200}
     .sidebar.active{right:0}
-    .sidebar .menu-btn{position:absolute;top:18px;right:18px;background:transparent;border:none;cursor:pointer}
-    .sidebar-logo{width:120px;height:120px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.08)}
-    .sidebar-logo img{width:88px;height:88px;object-fit:cover;display:block}
-    .sidebar .nav{display:flex;flex-direction:column;gap:18px;padding:0;margin:0}
-    .sidebar .nav a{display:block;color:#fff;text-decoration:none;font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;text-align:center;opacity:0.98;transition:transform .14s ease,opacity .14s ease}
-    .sidebar .nav a:hover{opacity:1;transform:translateX(6px)}
+    .sidebar .nav a{display:block;color:#fff;text-decoration:none;font-family:'Poppins',sans-serif;font-size:28px;font-weight:700;text-align:center;transition:opacity .2s ease}
+    .sidebar .nav a:hover{opacity:.85}
+    .sidebar .menu-btn{position:absolute;top:32px;background:transparent;border:none;cursor:pointer}
     .menu-group{display:flex;align-items:center;gap:16px;position:fixed;right:28px;top:18px;z-index:300}
     .menu-btn{background:none;border:0;cursor:pointer}
     footer{text-align:center;padding:28px 0;color:var(--green);font-size:14px}
@@ -108,12 +105,39 @@
 
       <aside class="card" style="display:flex;flex-direction:column;gap:16px;align-items:stretch">
         <h3 style="margin:0;font-size:20px;color:var(--green);font-weight:700">Rekomendasi</h3>
-        <ul style="margin:0;padding-left:18px;color:var(--text);line-height:1.8">
-          <li>Tambahkan bahan organik untuk memperbaiki struktur tanah.</li>
-          <li>Periksa pH tanah dan sesuaikan bila perlu.</li>
-          <li>Atur jadwal irigasi sesuai kelembaban.</li>
+
+        <ul id="recommendationsList" style="margin:0;padding-left:0;color:var(--text);line-height:1.6;list-style:none">
+          @if(!empty($recommendations) && count($recommendations))
+            @foreach($recommendations as $rec)
+              <li class="rec-item" style="padding:10px;border-radius:8px;background:rgba(255,255,255,0.03);margin-bottom:8px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+                  <div style="flex:1">
+                    <div style="font-weight:700;color:var(--green);font-size:14px">{{ $rec['title'] ?? 'Rekomendasi' }}</div>
+                    @if(!empty($rec['subtitle']))
+                      <div style="font-size:12px;color:var(--muted);margin-top:4px">{{ $rec['subtitle'] }}</div>
+                    @endif
+                  </div>
+
+                  <div style="display:flex;gap:8px;align-items:center">
+                    <button type="button" class="toggle-rec" data-id="{{ $loop->index }}" aria-expanded="false" style="background:transparent;border:1px solid rgba(0,0,0,0.06);padding:6px 8px;border-radius:8px;cursor:pointer;color:var(--green);font-weight:700">Detail</button>
+                    <button type="button" class="copy-rec" data-copy="{{ htmlspecialchars(($rec['title'] ?? '') . ' - ' . ($rec['detail'] ?? '')) }}" title="Copy" style="background:var(--green);color:#fff;border:0;padding:6px 8px;border-radius:8px;cursor:pointer">Salin</button>
+                  </div>
+                </div>
+
+                <div class="rec-detail" id="rec-detail-{{ $loop->index }}" style="display:none;margin-top:10px;color:var(--muted);font-size:13px">{{ $rec['detail'] ?? '' }}</div>
+
+                @if(!empty($rec['source']))
+                  <div style="margin-top:8px;font-size:12px;color:var(--muted)"><strong style="color:var(--muted)">Sumber:</strong> {{ $rec['source'] }}</div>
+                @endif
+              </li>
+            @endforeach
+          @else
+            <li style="margin-bottom:8px">Tambahkan bahan organik untuk memperbaiki struktur tanah.</li>
+            <li style="margin-bottom:8px">Periksa pH tanah dan sesuaikan bila perlu.</li>
+            <li style="margin-bottom:8px">Atur jadwal irigasi sesuai kelembaban.</li>
+            <div style="margin-top:8px"><strong style="color:var(--muted)">Sumber:</strong> Soil Sense Advisor</div>
+          @endif
         </ul>
-        <div style="margin-top:8px"><strong style="color:var(--muted)">Sumber:</strong> Soil Sense Advisor</div>
       </aside>
     </div>
   </main>
@@ -126,8 +150,8 @@
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
 
-    <div class="sidebar-logo">
-      <img src="{{ asset('images/LOGO 2.png') }}" alt="Soil Sense Logo">
+    <div style="width:120px;height:120px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+      <img src="{{ asset('images/LOGO 2.png') }}" alt="Soil Sense Logo" style="width:88px;height:88px;object-fit:cover;display:block;">
     </div>
 
     <nav class="nav">
@@ -147,6 +171,38 @@
       closeSidebar.addEventListener('click', () => sidebar.classList.remove('active'));
     }
     // Theme: keep markup compatible with central theme script in resources/js/app.js
+
+    // Recommendations interactivity: toggle details + copy text
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle detail panels
+      document.querySelectorAll('.toggle-rec').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          const panel = document.getElementById('rec-detail-' + id);
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          if (panel) {
+            panel.style.display = expanded ? 'none' : 'block';
+            btn.setAttribute('aria-expanded', (!expanded).toString());
+            btn.textContent = expanded ? 'Detail' : 'Tutup';
+          }
+        });
+      });
+
+      // Copy recommendation text to clipboard
+      document.querySelectorAll('.copy-rec').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const text = btn.getAttribute('data-copy') || btn.getAttribute('data-copy-text') || btn.textContent;
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = 'Disalin';
+            setTimeout(() => btn.textContent = 'Salin', 1200);
+          } catch (e) {
+            console.warn('Clipboard failed, fallback to prompt', e);
+            window.prompt('Salin teks berikut:', text);
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>

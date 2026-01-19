@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\CekTanahController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +30,4 @@ Route::get('/cek-tanah', function (){
     return view('cek_tanah');
 });
 
-Route::post('/cek-tanah/save', function (Request $request) {
-    $data = $request->only(['nitrogen', 'phosphorus', 'potassium', 'moisture']);
-    return view('hasil_cek_tanah', $data);
-});
+Route::post('/cek-tanah/save', [CekTanahController::class, 'save']);
